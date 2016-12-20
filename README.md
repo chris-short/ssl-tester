@@ -1,2 +1,2 @@
 # ssl-tester
-A small Go app designed specifically to help troubleshoot certificate chains
+A small Go app intended to help troubleshoot certificate chains and literally nothing more.
