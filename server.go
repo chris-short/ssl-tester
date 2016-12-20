@@ -9,7 +9,7 @@ import (
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains")
+		w.Header().Add("Strict-Transport-Security", "max-age=63072000;")
 		w.Write([]byte("Hello World!\n"))
 	})
 	cfg := &tls.Config{
@@ -30,14 +30,4 @@ func main() {
 		TLSNextProto: make(map[string]func(*http.Server, *tls.Conn, http.Handler), 0),
 	}
 	log.Fatal(srv.ListenAndServeTLS("tls.crt", "tls.key"))
-
-	f, err := os.OpenFile("testlogfile", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
-	if err != nil {
-		t.Fatalf("error opening file: %v", err)
-	}
-	defer f.Close()
-
-	log.SetOutput(f)
-	log.Println("This is a test log entry")
-
 }
