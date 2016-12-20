@@ -22,3 +22,8 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+# Prevent idiots like myself from checking in keys
+*.crt
+*.key
+*.csr
