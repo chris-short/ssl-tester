@@ -17,8 +17,6 @@ func main() {
 		CurvePreferences:         []tls.CurveID{tls.CurveP521, tls.CurveP384, tls.CurveP256},
 		PreferServerCipherSuites: true,
 		CipherSuites: []uint16{
-			tls.ECDHE-ECDSA-AES256-GCM-SHA384,
-			tls.ECDHE-RSA-AES256-GCM-SHA384,
 			tls.ECDHE-ECDSA-CHACHA20-POLY1305,
 			tls.ECDHE-RSA-CHACHA20-POLY1305,
 			tls.ECDHE-ECDSA-AES128-GCM-SHA256,
