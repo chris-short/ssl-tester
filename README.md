@@ -1,3 +1,5 @@
+[![GoDoc](https://godoc.org/github.com/chris-short/ssl-tester?status.svg)](https://godoc.org/github.com/chris-short/ssl-tester)
+
 # ssl-tester
 
 ## Description
