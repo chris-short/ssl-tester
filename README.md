@@ -1,4 +1,6 @@
 [![GoDoc](https://godoc.org/github.com/chris-short/ssl-tester?status.svg)](https://godoc.org/github.com/chris-short/ssl-tester)
+[![Build Status](https://travis-ci.org/chris-short/ssl-tester.svg?branch=master)](https://travis-ci.org/chris-short/ssl-tester)
+[![SSL Rating](https://sslbadge.org/?domain=gophercon.chrisshort.net)](https://www.ssllabs.com/ssltest/analyze.html?d=gophercon.chrisshort.net)
 
 # ssl-tester
 
