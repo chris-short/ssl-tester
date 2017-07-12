@@ -10,7 +10,7 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Add("Strict-Transport-Security", "max-age=63072000;")
-		w.Write([]byte("Hello World!\n"))
+		w.Write([]byte("Hello World!\n👋"))
 	})
 	cfg := &tls.Config{
 		MinVersion:               tls.VersionTLS12,
