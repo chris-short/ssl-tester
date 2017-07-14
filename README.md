@@ -10,7 +10,7 @@ A small Go app intended to help troubleshoot certificate chains.
 A detailed use case that prompted the creation of this code was featured on [opensource.com](https://opensource.com/article/17/4/testing-certificate-chains-34-line-go-program). I highly recommend reading it.
 
 ## Requirements
-- go
+- go (if you want to modify paths to certificates you will need to run: `go build`)
 - Valid TLS keys
 
 ## Installing
