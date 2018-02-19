@@ -1,74 +1,72 @@
----
-  language: go
-  sudo: false
-  branches:
-  only:
-  - master
-  - develop
-  notifications:
-    email: true
-  pushover:
-    api_key:
-      secure: Xk7hCu2tQ4uAzB/v6hER3MNcZSMy4kusgt6suTM++fAAHxhPWJAQp9T9dX6aBHjhag+I1wPoqg71O5Nzi7JCz3gzUgMbGSPk2t1LFn4iZJh8jXfPzKYSLG9L4XRrrVTidXPIFT5FXQ9R66vy/x37f0mFtD8iWyh6dDn6E2w4cZB2dYvxbcQuB0Yot4Zcrj+HCgeHM01CYQKDSGVAmXOuwcz3zohrpEVNJIFjeNIETWDa8Rm8/sfLtiUZVMgXadXF5UX6/2ExndQaHt0oailxKgZ7v+Wly3LKm1U4QKMZ33rwfZk1uyLfMPqsYIKj41G1iuazsg0eFa/agR976xDvIK2vC7Hzr3RwdlXQW5vZWv4+4EwayZwZyCxJfb0qZ2a+obZ9vYXvN9IkhWvv8RGcZWvF6hfic4jKFnLN2cSYvVw1CfdlwCosb5ghwFHlC1PG0DlPs7p9z8FBNME1tmGLk4HoTk2b5fDwRQIXTylmbBZIhn12DSXi0g7BNDDIgErK4/WnkF12yngauSHmgGQPPLzPZB4LlsTSUr8yukNB2PHgGv1a2oahXV5TU5TPwmM65y6HZKqvClIlYcpozCO3NnbNmdl/P/yPHJTvhHraG1/lOnvTeqNQkBzbml5Hx8E57WTRbR5ETvc1FgtEvUQdf0jtH8wzuCBhv26OKtxqePE=
-    users:
-      secure: A2PXof51gv0D3h5leAhM/xptYbxB9Z0AJ4O6b78a/3UGqDzuiCCeIFPFXNfyWyCwBImLOUgfakk2YVFiRM5OFN7OC/gm1YpTrWNRCUWvyoDreskUtrx07TH1ZF7bUB0DsdbTrPpTP09ApHvjhE7aUUWkJLOROUIOJBj6YIpihae3/cLpnixKC1vVevm7fX7MV3WI8mVcNQ8C7k5/VROrjU7djgkyXmZkLT9ipK2aeXHsjUVzANFMKNQchqcZsqY6rhyb2FgDivYFL+N16qyr5b078Jr1Ztr1T437s0gmBZYFdxvZG3rKHu+M5MlU+4tjTjrPM5W+YSDsdMc22jsc6RDM0qdXAXHSWnwDs2l0ZXGIormyk1/y2s4eHq1jnj5NtnsV5JAwSaOUzgp9vL7zzhC8rQZDK62BVcC8ac6XTORdzzCyiIzJ0VTN8bfWJu8zvvM/sdBiTWfxYVq4ti3zjCEbnS6gDg6e1frReyM5pTc6sC9nm0d18VcX7GjuDfhd/Pd16uveiuwphecovfe6f8sG/23Cx4AYoxZwpT5ZWYORyUSVXqQjPKNGQ2GX4tKDwroW0UWSGaCji/8TgwguWDCf5avEExcI8KRE8lFmINCspcEPqVI+0757/laGRTHcYEi/xY6e91HB3TY/0dxTmiASVXr8Tz2VMIX/XRguu6k=
-  go:
-    - 1.8.x
-    - 1.9.x
-    - master
-    - tip
-  env:
-    global:
-      - GO15VENDOREXPERIMENT=1
-  install:
-    - go get github.com/golang/lint/golint
-  script:
-    - go build -v
-    - go vet $(go list ./... | grep -v vendor)
-    - test -z "$(golint ./... | grep -v vendor | tee /dev/stderr)"
-    - test -z "$(gofmt -s -l . | grep -v vendor | tee /dev/stderr)"
-    - go test $(go list ./... | grep -v vendor)
-    - make release
-  deploy:
-    provider: releases
-    api_key:
-      secure: "mzVO0uc7ZOtxTAifrYen8c30D0KPJ0UbXrl4pO/3qzJ/wIwqdZWUjz3ICNyWsew+TWJMwu3GS7tNj1UuFgrqZaV2Px1K40dl7hG/ZecTFIza2epBBLThksdiALQ/L1n7aJ7orJtFq8sPKkvd3/fcC0tDU0JDVdBTbb91oJ254hWN0vqS6LiFVNE8LHgCgg82MrPMXZsdkIiyuyP7q4k8k4HYQ5s3+jq61TmaLbO7RsM3a7t8ByI5Cd01wA6zrEqiIrkL3S+wc3enhXgi/UldeCHdYTLTE+M0Vsq04oshRXifmD1QUBqrRk8U4aqAHKme62JeT2y7b4+96yRB/lcLE3YTxOHZMh9GXrKFJO38h4Ij0reSWOhAve4F10U7PxFFek+M4/dXjSYtTjkdvIE2RZ+D6djFrvd2PItfuNUu8Ydk4kEtbnM72kXdVI8SBbC3TJfIKYR7Q9nHBZ3jpHws14cX1Myeo8O0W/g69Fhue/pDvaFKnUMX4UzITnaJ11XTP/PveWYN5hg2ak702zyVTiIQJIRXJTTM1XIaY6PeYLY5OIs0yAzZ3aXJTwIL/0KgT0T3FNTRONiDLessbOlMEZe5x/Sg9Rt1XTsE68splFqbdXDGZKph7vmE2PpfTR2EQZsu7ADmYa095FTfz6AqyaEGGWhDR3LhQamMydUfHqk="
-    file:
-      - cross/ssl-tester-linux-amd64.md5
-      - cross/ssl-tester-windows-386.sha256
-      - cross/ssl-tester-linux-arm
-      - cross/ssl-tester-darwin-amd64.md5
-      - cross/ssl-tester-darwin-amd64
-      - cross/ssl-tester-solaris-amd64.md5
-      - cross/ssl-tester-linux-arm64.sha256
-      - cross/ssl-tester-linux-arm.sha256
-      - cross/ssl-tester-linux-386.sha256
-      - cross/ssl-tester-darwin-386.md5
-      - cross/ssl-tester-windows-386.md5
-      - cross/ssl-tester-freebsd-amd64.md5
-      - cross/ssl-tester-linux-arm64.md5
-      - cross/ssl-tester-linux-arm64
-      - cross/ssl-tester-freebsd-amd64.sha256
-      - cross/ssl-tester-freebsd-386.md5
-      - cross/ssl-tester-linux-amd64.sha256
-      - cross/ssl-tester-linux-386.md5
-      - cross/ssl-tester-freebsd-386
-      - cross/ssl-tester-solaris-amd64.sha256
-      - cross/ssl-tester-windows-amd64
-      - cross/ssl-tester-windows-amd64.md5
-      - cross/ssl-tester-windows-amd64.sha256
-      - cross/ssl-tester-linux-arm.md5
-      - cross/ssl-tester-darwin-386.sha256
-      - cross/ssl-tester-darwin-amd64.sha256
-      - cross/ssl-tester-windows-386
-      - cross/ssl-tester-solaris-amd64
-      - cross/ssl-tester-darwin-386
-      - cross/ssl-tester-linux-386
-      - cross/ssl-tester-freebsd-amd64
-      - cross/ssl-tester-freebsd-386.sha256
-      - cross/ssl-tester-linux-amd64
-    skip_cleanup: true
-    on:
-      go: tip
-      tags: true
-    
+language: go
+sudo: false
+branches: 
+only:
+- master
+- develop
+notifications:
+  email: true
+pushover:
+  api_key:
+    secure: Xk7hCu2tQ4uAzB/v6hER3MNcZSMy4kusgt6suTM++fAAHxhPWJAQp9T9dX6aBHjhag+I1wPoqg71O5Nzi7JCz3gzUgMbGSPk2t1LFn4iZJh8jXfPzKYSLG9L4XRrrVTidXPIFT5FXQ9R66vy/x37f0mFtD8iWyh6dDn6E2w4cZB2dYvxbcQuB0Yot4Zcrj+HCgeHM01CYQKDSGVAmXOuwcz3zohrpEVNJIFjeNIETWDa8Rm8/sfLtiUZVMgXadXF5UX6/2ExndQaHt0oailxKgZ7v+Wly3LKm1U4QKMZ33rwfZk1uyLfMPqsYIKj41G1iuazsg0eFa/agR976xDvIK2vC7Hzr3RwdlXQW5vZWv4+4EwayZwZyCxJfb0qZ2a+obZ9vYXvN9IkhWvv8RGcZWvF6hfic4jKFnLN2cSYvVw1CfdlwCosb5ghwFHlC1PG0DlPs7p9z8FBNME1tmGLk4HoTk2b5fDwRQIXTylmbBZIhn12DSXi0g7BNDDIgErK4/WnkF12yngauSHmgGQPPLzPZB4LlsTSUr8yukNB2PHgGv1a2oahXV5TU5TPwmM65y6HZKqvClIlYcpozCO3NnbNmdl/P/yPHJTvhHraG1/lOnvTeqNQkBzbml5Hx8E57WTRbR5ETvc1FgtEvUQdf0jtH8wzuCBhv26OKtxqePE=
+  users:
+    secure: A2PXof51gv0D3h5leAhM/xptYbxB9Z0AJ4O6b78a/3UGqDzuiCCeIFPFXNfyWyCwBImLOUgfakk2YVFiRM5OFN7OC/gm1YpTrWNRCUWvyoDreskUtrx07TH1ZF7bUB0DsdbTrPpTP09ApHvjhE7aUUWkJLOROUIOJBj6YIpihae3/cLpnixKC1vVevm7fX7MV3WI8mVcNQ8C7k5/VROrjU7djgkyXmZkLT9ipK2aeXHsjUVzANFMKNQchqcZsqY6rhyb2FgDivYFL+N16qyr5b078Jr1Ztr1T437s0gmBZYFdxvZG3rKHu+M5MlU+4tjTjrPM5W+YSDsdMc22jsc6RDM0qdXAXHSWnwDs2l0ZXGIormyk1/y2s4eHq1jnj5NtnsV5JAwSaOUzgp9vL7zzhC8rQZDK62BVcC8ac6XTORdzzCyiIzJ0VTN8bfWJu8zvvM/sdBiTWfxYVq4ti3zjCEbnS6gDg6e1frReyM5pTc6sC9nm0d18VcX7GjuDfhd/Pd16uveiuwphecovfe6f8sG/23Cx4AYoxZwpT5ZWYORyUSVXqQjPKNGQ2GX4tKDwroW0UWSGaCji/8TgwguWDCf5avEExcI8KRE8lFmINCspcEPqVI+0757/laGRTHcYEi/xY6e91HB3TY/0dxTmiASVXr8Tz2VMIX/XRguu6k=
+go:
+- 1.8.x
+- 1.9.x
+- master
+- tip
+env:
+  global:
+  - GO15VENDOREXPERIMENT=1
+install:
+- go get github.com/golang/lint/golint
+script:
+- go build -v
+- go vet $(go list ./... | grep -v vendor)
+- test -z "$(golint ./... | grep -v vendor | tee /dev/stderr)"
+- test -z "$(gofmt -s -l . | grep -v vendor | tee /dev/stderr)"
+- go test $(go list ./... | grep -v vendor)
+- make release
+deploy:
+  provider: releases
+  api_key:
+    secure: "W4HOrhoPpC0FV4sNvKJ5jI4bmhyaNu+JOAnxXXJYIMsRtcbRIofk+vXSzSSxwPZBBRJIeXq7o+PMKc0xltVsRwfNGRXnQeoVBhRCc61n5SxcKiyzU63ZxqujjSaGwn3coz8TM4bPXEfrcKoSBQmWiyCOTHF1MNPwhGKh2Q+D7f2JLanvYjTOuRGiowTcQ3G+d+3tB1b82Q0oWi//8WVDU5K6XNnZgRJjrPuNkTBWe6ipBALNFm5PBo673/vMxp8pHPzDkQP1KitHDyWMr9gn1aavaafc9sbe83BjdzcvWyGBW0D/sP4Uiw0njkDegP7JxmaJYb2c3o1n+XqrgtXN21M1r4j7SibA0EspOqZDFOe7n5TuED7hFxTCeWaXtlMBPyPEm6iiAS8uVx9EFcRkh6tAxMdU9wyEPa2+u1ooHA9twDPDbIm1SiZnm23zDiou7eXk5EtQPts2uyUuJDD+ESf9Cul5jGUvBeVTrjUqrdia3uvKgq5VQvDaD0c1PnKR4BRk9zmTnLLPHIFL6PqfZrJUEKGZ+li6ZskgVWDsuWonqf7RYWI+Y8cP8F8muc1McFPQ8CY6aX2AB1UiPHZHdWm8YslKNW3pJYfzjAEikQRR5FJJ3a/D0ZQMvS5XqobZjM6A8R3ixQerT4HFbpN4/HEgzqRCL+D5xkSZG1FJO5c="
+  file:
+  - cross/ssl-tester-linux-amd64.md5
+  - cross/ssl-tester-windows-386.sha256
+  - cross/ssl-tester-linux-arm
+  - cross/ssl-tester-darwin-amd64.md5
+  - cross/ssl-tester-darwin-amd64
+  - cross/ssl-tester-solaris-amd64.md5
+  - cross/ssl-tester-linux-arm64.sha256
+  - cross/ssl-tester-linux-arm.sha256
+  - cross/ssl-tester-linux-386.sha256
+  - cross/ssl-tester-darwin-386.md5
+  - cross/ssl-tester-windows-386.md5
+  - cross/ssl-tester-freebsd-amd64.md5
+  - cross/ssl-tester-linux-arm64.md5
+  - cross/ssl-tester-linux-arm64
+  - cross/ssl-tester-freebsd-amd64.sha256
+  - cross/ssl-tester-freebsd-386.md5
+  - cross/ssl-tester-linux-amd64.sha256
+  - cross/ssl-tester-linux-386.md5
+  - cross/ssl-tester-freebsd-386
+  - cross/ssl-tester-solaris-amd64.sha256
+  - cross/ssl-tester-windows-amd64
+  - cross/ssl-tester-windows-amd64.md5
+  - cross/ssl-tester-windows-amd64.sha256
+  - cross/ssl-tester-linux-arm.md5
+  - cross/ssl-tester-darwin-386.sha256
+  - cross/ssl-tester-darwin-amd64.sha256
+  - cross/ssl-tester-windows-386
+  - cross/ssl-tester-solaris-amd64
+  - cross/ssl-tester-darwin-386
+  - cross/ssl-tester-linux-386
+  - cross/ssl-tester-freebsd-amd64
+  - cross/ssl-tester-freebsd-386.sha256
+  - cross/ssl-tester-linux-amd64
+  skip_cleanup: true
+  on:
+    go: tip
+    tags: true
