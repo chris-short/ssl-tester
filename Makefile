@@ -4,7 +4,7 @@
 PREFIX?=$(shell pwd)
 
 # Setup name variables for the package/tool
-NAME := purgeflare
+NAME := ssl-tester
 PKG := github.com/chris-short/$(NAME)
 
 # Set any default go build tags
