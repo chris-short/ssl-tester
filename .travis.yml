@@ -1,6 +1,10 @@
 ---
   language: go
   sudo: false
+  branches:
+  only:
+  - master
+  - develop
   notifications:
     email: true
   pushover:
@@ -11,11 +15,12 @@
   go:
     - 1.8.x
     - 1.9.x
+    - 1.10.x
     - master
     - tip
-#  env:
-#    global:
-#      - GO15VENDOREXPERIMENT=1
+  env:
+    global:
+      - GO15VENDOREXPERIMENT=1
   install:
     - go get github.com/golang/lint/golint
   script:
