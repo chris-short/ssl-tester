@@ -21,7 +21,7 @@ env:
   global:
   - GO15VENDOREXPERIMENT=1
 install:
-- go get -u golang.org/x/lint/golint
+- go get golang.org/x/lint/golint
 script:
 - go build -v
 - go vet $(go list ./... | grep -v vendor)
