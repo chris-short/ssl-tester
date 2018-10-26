@@ -11,11 +11,11 @@ COPY . /go/src/github.com/chris-short/ssl-tester
 
 RUN set -x \
   && apk add --no-cache --virtual .build-deps \
-    go \
-    git \
-    gcc \
-    libc-dev \
-    libgcc \
+  go \
+  git \
+  gcc \
+  libc-dev \
+  libgcc \
   && cd /go/src/github.com/chris-short/ssl-tester \
   && go build -o /usr/bin/ssl-tester . \
   && apk del .build-deps \
