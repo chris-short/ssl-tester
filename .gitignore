@@ -27,4 +27,8 @@ _testmain.go
 *.crt
 *.key
 *.csr
+*.pem
 /ssl-tester
+*.ini
+
+*.retry

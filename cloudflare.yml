@@ -1,0 +1,27 @@
+---
+- name: Update Cloudflare DNS Record
+  connection: local
+  gather_facts: false
+  hosts: localhost
+  vars:
+    cf_domain: "{{ lookup('env', 'CF_DOMAIN') }}"
+    cf_hostname: "{{ lookup('env', 'CF_HOSTNAME') }}"
+    cf_email: "{{ lookup('env', 'CF_EMAIL') }}"
+    cf_key: "{{ lookup('env', 'CF_KEY') }}"
+  tasks:
+    - name: Get Public IP Address to Use
+      ipify_facts:
+      register: public_ip
+    - debug:
+        msg: "{{ public_ip.ansible_facts.ipify_public_ip }}"
+    - name: Manage with cloudflare_dns Module
+      cloudflare_dns:
+        zone: "{{ cf_domain }}"
+        record: "{{ cf_hostname }}"
+        type: A
+        value: "{{ public_ip.ansible_facts.ipify_public_ip }}"
+        proxied: no
+        solo: true
+        state: present
+        account_email: "{{ cf_email }}"
+        account_api_token: "{{ cf_key }}"

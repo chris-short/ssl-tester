@@ -4,17 +4,19 @@ LABEL maintainer Chris Short <chris@chrisshort.net>
 
 ARG cf_domain
 ARG cf_email
+ARG cf_id
 ARG cf_key
+ARG cf_zone
 
 ENV CF_DOMAIN $cf_domain
 ENV CF_EMAIL $cf_email
+ENV CF_ID $cf_id
 ENV CF_KEY $cf_key
+ENV CF_ZONE $cf_zone
 ENV GOPATH /go
 ENV PATH /go/bin:/usr/local/go/bin:$PATH
 
-ADD ini.sh /root/
-ADD run.sh /root/
-#RUN ls -l /root/*.sh ; 
+ADD cert.sh /root/
 
 EXPOSE 80 443
 
@@ -34,4 +36,6 @@ RUN set -x \
   && rm -rf /go \
   && echo "Build complete."
 
-ENTRYPOINT [ "/root/run.sh" ]
+RUN /root/cert.sh
+
+ENTRYPOINT [ "ssl-tester" ]
