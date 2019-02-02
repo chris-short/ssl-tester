@@ -1,4 +1,5 @@
 # STOLEN FROM JESS FRAZELLE (https://github.com/jessfraz/ghb0t/blob/d001182ea04a3d7d6cbf0d3101ad915bec1466ee/Makefile)
+# I DON'T KNOW IF THIS STILL WORKS --cshort 2019-02-02
 
 # Set an output prefix, which is the local directory if not specified
 PREFIX?=$(shell pwd)
