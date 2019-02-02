@@ -29,7 +29,7 @@ RUN mkdir -p /etc/ssl-tester \
 #  && ls -l /etc/letsencrypt/live/* \
   && ln -s /etc/letsencrypt/live/${CF_DOMAIN}/fullchain.pem /etc/ssl-tester/fullchain.pem \
   && ln -s /etc/letsencrypt/live/${CF_DOMAIN}/privkey.pem /etc/ssl-tester/privkey.pem \
-  rm -f /root/ini.sh \
+  && rm -f /root/ini.sh \
   rm -f /root/cf.ini
 
 ENV PATH /go/bin:/usr/local/go/bin:$PATH
