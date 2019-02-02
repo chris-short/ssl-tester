@@ -46,5 +46,5 @@ func main() {
 		TLSConfig:    cfg,
 		TLSNextProto: make(map[string]func(*http.Server, *tls.Conn, http.Handler), 0),
 	}
-	log.Fatal(srv.ListenAndServeTLS("/etc/letsencrypt/live/ssl-tester.chrisshort.net/fullchain.pem", "/etc/letsencrypt/live/ssl-tester.chrisshort.net/privkey.pem"))
+	log.Fatal(srv.ListenAndServeTLS("/etc/ssl-tester/fullchain.pem", "/etc/ssl-tester/privkey.pem"))
 }
