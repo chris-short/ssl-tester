@@ -1,4 +1,6 @@
-FROM certbot/dns-cloudflare:latest as certificate
+FROM certbot/dns-cloudflare:latest
+
+LABEL maintainer Chris Short <chris@chrisshort.net>
 
 ARG cf_domain
 ARG cf_email
@@ -29,9 +31,6 @@ RUN mkdir -p /etc/ssl-tester \
   && ln -s /etc/letsencrypt/live/${CF_DOMAIN}/privkey.pem /etc/ssl-tester/privkey.pem \
   rm -f /root/ini.sh \
   rm -f /root/cf.ini
-
-FROM alpine:latest as build
-LABEL maintainer Chris Short <chris@chrisshort.net>
 
 ENV PATH /go/bin:/usr/local/go/bin:$PATH
 ENV GOPATH /go
