@@ -39,3 +39,9 @@ RUN set -x \
 RUN /root/cert.sh
 
 ENTRYPOINT [ "ssl-tester" ]
+
+FROM ansible/ansible-runner:latest as runner
+
+ADD cloudflare.yml /root/cloudflare.yml
+
+RUN ansible-runner -p cloudflare.yml run /root

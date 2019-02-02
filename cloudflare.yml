@@ -5,8 +5,8 @@
   hosts: localhost
   vars:
     cf_domain: "{{ lookup('env', 'CF_DOMAIN') }}"
-    cf_hostname: "{{ lookup('env', 'CF_HOSTNAME') }}"
     cf_email: "{{ lookup('env', 'CF_EMAIL') }}"
+    cf_hostname: "{{ lookup('env', 'CF_HOSTNAME') }}"
     cf_key: "{{ lookup('env', 'CF_KEY') }}"
   tasks:
     - name: Get Public IP Address to Use

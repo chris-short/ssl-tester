@@ -1,0 +1,17 @@
+FROM ansible/ansible-runner:latest as runner
+
+LABEL maintainer Chris Short <chris@chrisshort.net>
+
+ARG cf_domain
+ARG cf_email
+ARG cf_hostname
+ARG cf_key
+
+ENV CF_DOMAIN $cf_domain
+ENV CF_EMAIL $cf_email
+ENV CF_HOSTNAME $cf_hostname
+ENV CF_KEY $cf_key
+
+ADD cloudflare.yml /root/cloudflare.yml
+
+RUN ansible-runner -p cloudflare.yml run /root
