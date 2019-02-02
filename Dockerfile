@@ -10,6 +10,8 @@ ARG cf_key
 
 ADD ini.sh /var/tmp/
 
+EXPOSE 80 443
+
 RUN mkdir -p /etc/ssl-tester \
   && /var/tmp/ini.sh \ 
   && ln -s /etc/letsencrypt/live/${CF_DOMAIN}/fullchain.pem /etc/ssl-tester/fullchain.pem \
