@@ -8,17 +8,17 @@ ARG cf_domain
 ARG cf_email
 ARG cf_key
 
-ADD ini.sh /
+ADD ini.sh /var/tmp/
 
-RUN /ini.sh \
-  && mkdir -p /etc/ssl-tester \
+RUN mkdir -p /etc/ssl-tester \
+  && /var/tmp/ini.sh \ 
   && ln -s /etc/letsencrypt/live/${CF_DOMAIN}/fullchain.pem /etc/ssl-tester/fullchain.pem \
   && ln -s /etc/letsencrypt/live/${CF_DOMAIN}/privkey.pem /etc/ssl-tester/privkey.pem \
   && certbot register --agree-tos --eff-email --email ${CF_EMAIL} \
   && certbot certonly \
   --dns-cloudflare \
   --dns-cloudflare-propagation-seconds 5 \
-  --dns-cloudflare-credentials /cf.ini \
+  --dns-cloudflare-credentials /etc/ssl-tester/cf.ini \
   -d ${CF_DOMAIN}
 
 FROM alpine:latest as build
@@ -44,5 +44,7 @@ RUN set -x \
   && apk del .build-deps \
   && rm -rf /go \
   && echo "Build complete."
+
+EXPOSE 80 443
 
 ENTRYPOINT [ "ssl-tester" ]
