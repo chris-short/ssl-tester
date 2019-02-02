@@ -1,3 +1,24 @@
+FROM certbot/dns-cloudflare:latest as certificate
+
+ARG cf_domain
+ARG cf_email
+ARG cf_key
+
+ENV CF_DOMAIN $cf_domain
+ENV CF_EMAIL $cf_email
+ENV CF_KEY $cf_key
+
+ADD ini.sh /
+
+RUN /ini.sh
+
+RUN certbot register --agree-tos --eff-email --email ${CF_EMAIL} \
+  && certbot certonly \
+  --dns-cloudflare \
+  --dns-cloudflare-propagation-seconds 15 \
+  --dns-cloudflare-credentials /cf.ini \
+  -d ${CF_DOMAIN}
+
 FROM alpine:latest as build
 LABEL maintainer Chris Short <chris@chrisshort.net>
 
@@ -21,26 +42,5 @@ RUN set -x \
   && apk del .build-deps \
   && rm -rf /go \
   && echo "Build complete."
-
-FROM certbot/dns-cloudflare:latest
-
-ARG cf_domain
-ARG cf_email
-ARG cf_key
-
-ENV CF_DOMAIN $cf_domain
-ENV CF_EMAIL $cf_email
-ENV CF_KEY $cf_key
-
-COPY cloudflare.ini cf.ini
-
-RUN certbot certonly \
-  --dns-cloudflare \
-  --dns-cloudflare-propagation-seconds 15 \
-  --dns_cloudflare_email ${CF_EMAIL} \
-  --dns_cloudflare_api_key ${CF_KEY} \
-#  --dns-cloudflare-credentials cf.ini \
-  -d ${CF_DOMAIN}
-#  && cat /var/log/letsencrypt/letsencrypt.log
 
 ENTRYPOINT [ "ssl-tester" ]

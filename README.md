@@ -1,6 +1,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/chris-short/ssl-tester)](https://goreportcard.com/report/github.com/chris-short/ssl-tester)
 [![GoDoc](https://godoc.org/github.com/chris-short/ssl-tester?status.svg)](https://godoc.org/github.com/chris-short/ssl-tester)
 [![Build Status](https://travis-ci.org/chris-short/ssl-tester.svg?branch=master)](https://travis-ci.org/chris-short/ssl-tester)
+[![Docker Repository on Quay](https://quay.io/repository/chrisshort/ssl-tester/status "Docker Repository on Quay")](https://quay.io/repository/chrisshort/ssl-tester)
 [![SSL Rating](https://sslbadge.org/?domain=ssl-tester.chrisshort.net)](https://www.ssllabs.com/ssltest/analyze.html?d=ssl-tester.chrisshort.net)
 
 # ssl-tester

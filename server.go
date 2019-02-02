@@ -21,7 +21,7 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Add("Strict-Transport-Security", "max-age=63072000;")
-		w.Write([]byte("<h1>Hello World!</h1>\n<h1>👋👋👋👋👋</h1>"))
+		w.Write([]byte("<h1>Hello World!</h1>\n<h1>👋👋👋👋👋</h1>\nSource: https://github.com/chris-short/ssl-tester"))
 	})
 	cfg := &tls.Config{
 		MinVersion:               tls.VersionTLS12,
@@ -46,5 +46,5 @@ func main() {
 		TLSConfig:    cfg,
 		TLSNextProto: make(map[string]func(*http.Server, *tls.Conn, http.Handler), 0),
 	}
-	log.Fatal(srv.ListenAndServeTLS("/etc/ssl-tester/tls.crt", "/etc/ssl-tester/tls.key"))
+	log.Fatal(srv.ListenAndServeTLS("/etc/letsencrypt/live/ssl-tester.chrisshort.net/fullchain.pem", "/etc/letsencrypt/live/ssl-tester.chrisshort.net/privkey.pem"))
 }
