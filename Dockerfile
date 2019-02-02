@@ -1,20 +1,23 @@
 FROM certbot/dns-cloudflare:latest as certificate
 
-ARG cf_domain
-ARG cf_email
-ARG cf_key
-
 ENV CF_DOMAIN $cf_domain
 ENV CF_EMAIL $cf_email
 ENV CF_KEY $cf_key
 
+ARG cf_domain
+ARG cf_email
+ARG cf_key
+
 ADD ini.sh /
 
 RUN /ini.sh \
+  && mkdir -p /etc/ssl-tester \
+  && ln -s /etc/letsencrypt/live/${CF_DOMAIN}/fullchain.pem /etc/ssl-tester/fullchain.pem \
+  && ln -s /etc/letsencrypt/live/${CF_DOMAIN}/privkey.pem /etc/ssl-tester/privkey.pem \
   && certbot register --agree-tos --eff-email --email ${CF_EMAIL} \
   && certbot certonly \
   --dns-cloudflare \
-  --dns-cloudflare-propagation-seconds 15 \
+  --dns-cloudflare-propagation-seconds 5 \
   --dns-cloudflare-credentials /cf.ini \
   -d ${CF_DOMAIN}
 

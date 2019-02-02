@@ -29,6 +29,16 @@ A public and private key at `/etc/ssl-tester/tls.crt` and `/etc/ssl-tester/tls.k
 
 If you want to compile ssl-tester for another platform you can clone this repo and use `go build`. I encourage you to read Dave Chaney's [Cross compilation with Go](https://dave.cheney.net/2015/08/22/cross-compilation-with-go-1-5) to better understand that process.
 
+## Container
+
+To build the container you will need to set environment variables in your local environment and pass them through to the container.
+
+Container uses Let's Encrypt (certbot) and Cloudflare to obtain DNS. Say what you want about Cloudflare but it's free and good so it's the lowest barrier to entry.
+
+`docker build --build-arg cf_email=$CF_EMAIL --build-arg cf_key=$CF_KEY --build-arg cf_domain=$CF_DOMAIN -t quay.io/chrisshort/ssl-tester .`
+
+Yes, this README is not great. Check me, Boo.
+
 ## Caveats
 
 You might be able to use it to serve a frontend for a small service too if you'd so desire. Pull requests welcome!
