@@ -10,9 +10,8 @@ ENV CF_KEY $cf_key
 
 ADD ini.sh /
 
-RUN /ini.sh
-
-RUN certbot register --agree-tos --eff-email --email ${CF_EMAIL} \
+RUN /ini.sh \
+  && certbot register --agree-tos --eff-email --email ${CF_EMAIL} \
   && certbot certonly \
   --dns-cloudflare \
   --dns-cloudflare-propagation-seconds 15 \
