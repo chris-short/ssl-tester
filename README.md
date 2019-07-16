@@ -16,6 +16,7 @@ A detailed use case that prompted the creation of this code was featured on [ope
 
 - go (if you want to modify paths to certificates you will need to run: `go build`)
 - Valid TLS keys
+- sudo (or root access) to run the ssl-tester server that binds to port 443
 
 ## Installing
 
