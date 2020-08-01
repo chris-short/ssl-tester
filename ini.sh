@@ -1,5 +1,7 @@
 #!/bin/sh
 
+mkdir -p /root/.credentials
+
 cat <<EOF > /root/.credentials/cf.ini
 # Cloudflare API credentials used by Certbot
 dns_cloudflare_email = $CF_EMAIL
