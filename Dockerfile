@@ -16,7 +16,7 @@ ADD ini.sh /root/
 ADD run.sh /root/
 #RUN ls -l /root/*.sh ; 
 
-EXPOSE 80 443
+EXPOSE 8080 8443
 
 COPY . /go/src/github.com/chris-short/ssl-tester
 

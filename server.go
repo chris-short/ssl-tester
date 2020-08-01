@@ -17,7 +17,7 @@ func redirect(w http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
-	go http.ListenAndServe(":80", http.HandlerFunc(redirect))
+	go http.ListenAndServe(":8080", http.HandlerFunc(redirect))
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Add("Strict-Transport-Security", "max-age=63072000;")
@@ -41,7 +41,7 @@ func main() {
 		},
 	}
 	srv := &http.Server{
-		Addr:         ":443",
+		Addr:         ":8443",
 		Handler:      mux,
 		TLSConfig:    cfg,
 		TLSNextProto: make(map[string]func(*http.Server, *tls.Conn, http.Handler), 0),
