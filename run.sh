@@ -2,7 +2,7 @@
 
 mkdir -p /etc/ssl-tester &&
     #  && ls -ld /etc/ssl-tester \
-    ini.sh &&
+    ./ini.sh &&
     #  && cat /root/cf.ini \
     certbot register --agree-tos --eff-email --email ${CF_EMAIL} &&
     certbot certonly \
