@@ -3,6 +3,9 @@
 [![Build Status](https://travis-ci.org/chris-short/ssl-tester.svg?branch=master)](https://travis-ci.org/chris-short/ssl-tester)
 [![Docker Repository on Quay](https://quay.io/repository/chrisshort/ssl-tester/status "Docker Repository on Quay")](https://quay.io/repository/chrisshort/ssl-tester)
 [![SSL Rating](https://sslbadge.org/?domain=ssl-tester.chrisshort.net)](https://www.ssllabs.com/ssltest/analyze.html?d=ssl-tester.chrisshort.net)
+![Twitter Follow](https://img.shields.io/twitter/follow/ChrisShort?style=social)
+![GitHub followers](https://img.shields.io/github/followers/chris-short?style=social)
+![Subreddit subscribers](https://img.shields.io/reddit/subreddit-subscribers/devopsish?style=social)
 
 # ssl-tester
 
